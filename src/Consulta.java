@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /** 
  * MIT License
@@ -103,7 +104,15 @@ public abstract class Consulta {
 	 */
 	public boolean estahNoDia(LocalDate data) {
 		//TODO
-		return false;
+
+		boolean sucesso = false;
+
+		long dias = LocalDate.now().until(data, ChronoUnit.DAYS);
+
+		if(dias == 0)
+			sucesso = true;
+
+		return sucesso;
 	}
 
 }

@@ -63,11 +63,20 @@ public class ConsultaAgendada extends Consulta {
 	public ConsultaAgendada(String paciente, LocalDateTime hora, EEspecialidade espec) {
 		LocalDate data = LocalDate.from(hora);
 		long dias = LocalDate.now().until(data, ChronoUnit.DAYS);
+
+		super(paciente, hora, espec);
+
 		if(dias < ANTECEDENCIA_MINIMA)
 			hora = LocalDateTime.now().plusDays(ANTECEDENCIA_MINIMA);
-		super(paciente, hora, espec);
 		
 		//TODO: calcular desconto, se for o caso.
+		
+		if(dias >= ANTECEDENCIA_DESCONTO)
+			hora = LocalDateTime.now().plusDays(ANTECEDENCIA_DESCONTO);		
+			valorDesconto = PCT_DESCONTO * especialidade.valor();
+			
+		
+
 
 	}
 
